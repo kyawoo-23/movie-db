@@ -3,12 +3,23 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "@/pages/Home/HomePage.tsx";
+import Layout from "@/components/Layout";
+import MovieDetails from "@/pages/Details/MovieDetails";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
-    index: true,
+    element: <Layout />,
+    children: [
+      {
+        element: <HomePage />,
+        index: true,
+      },
+      {
+        path: "/:id",
+        element: <MovieDetails />,
+      },
+    ],
   },
 ]);
 
