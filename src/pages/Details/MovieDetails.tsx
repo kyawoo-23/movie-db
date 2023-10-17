@@ -2,6 +2,7 @@ import { DetailsAPI } from "@/api/detailsAPI";
 import Pill from "@/components/Pill";
 import { MovieDetailsResponse } from "@/types";
 import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
+import PlaceHolderImage from "@/assets/Placeholder.png";
 
 function MovieDetails() {
   const res = useLoaderData() as MovieDetailsResponse;
@@ -10,15 +11,23 @@ function MovieDetails() {
     <>
       <div className='mt-14 relative'>
         <img
-          src={`https://image.tmdb.org/t/p/w1280/${res.backdrop_path}`}
+          src={
+            res.backdrop_path === null
+              ? PlaceHolderImage
+              : `https://image.tmdb.org/t/p/w1280/${res.backdrop_path}`
+          }
           className='opacity-50 h-[500px] w-full object-cover'
           alt={res.title}
         />
         <div className='grid grid-cols-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-10'>
           <div className='col-span-1'>
             <img
-              src={`https://image.tmdb.org/t/p/w342/${res.poster_path}`}
-              className='h-[400px] rounded'
+              src={
+                res.poster_path === null
+                  ? PlaceHolderImage
+                  : `https://image.tmdb.org/t/p/w342/${res.poster_path}`
+              }
+              className='h-[400px] rounded object-cover'
               alt={res.title}
             />
           </div>

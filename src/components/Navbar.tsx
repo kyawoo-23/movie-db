@@ -15,9 +15,12 @@ function Navbar() {
   };
 
   return (
-    <div className='flex flex-row justify-between bg-slate-950 px-24 py-5'>
+    <div className='flex flex-row justify-between bg-slate-950 px-24 py-5 shadow-lg'>
       <div className='text-white'>
-        <Link to={"/"} className='font-bold font-mono text-xl'>
+        <Link
+          to={"/"}
+          className='font-bold font-mono text-xl bg-primary px-3 py-1'
+        >
           TheMovieDB
         </Link>
       </div>
