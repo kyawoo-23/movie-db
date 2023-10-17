@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "@/pages/Home/HomePage.tsx";
 import Layout from "@/components/Layout";
 import MovieDetails, { LoaderMovieDetails } from "@/pages/Details/MovieDetails";
+import ErrorPage from "./pages/Error/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -14,11 +15,13 @@ const router = createBrowserRouter([
       {
         element: <HomePage />,
         index: true,
+        errorElement: <ErrorPage />,
       },
       {
         path: "/:movie_id",
         element: <MovieDetails />,
         loader: LoaderMovieDetails,
+        errorElement: <ErrorPage />,
       },
     ],
   },

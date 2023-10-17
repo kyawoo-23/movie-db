@@ -2,6 +2,7 @@ import { DiscoverAPI } from "@/api/discoverAPI";
 import { SearchAPI } from "@/api/searchAPI";
 import Loader from "@/components/Loader";
 import MovieCard from "@/components/MovieCard";
+import ErrorPage from "@/pages/Error/ErrorPage";
 import { Movie } from "@/types";
 import { useEffect, useState } from "react";
 import { useNavigation, useSearchParams } from "react-router-dom";
@@ -11,22 +12,27 @@ function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams({ page: "1", q: "" });
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
     setIsLoading(true);
-
+    setIsError(false);
     // CALL API IF SEARCH-PARAMS CHANGES
     (async () => {
       const page = searchParams.get("page") || "1";
       const query = searchParams.get("q") || "";
-      if (query === "") {
-        // CALL DISCOVER API
-        const res = await DiscoverAPI.GetAll(parseInt(page));
-        setMovies(res.data.results);
-      } else if (query.length > 1) {
-        // CALL SEARCH API
-        const res = await SearchAPI.SearchQuery(parseInt(page), query);
-        setMovies(res.data.results);
+      try {
+        if (query === "") {
+          // CALL DISCOVER API
+          const res = await DiscoverAPI.GetAll(parseInt(page));
+          setMovies(res.data.results);
+        } else if (query.length > 1) {
+          // CALL SEARCH API
+          const res = await SearchAPI.SearchQuery(parseInt(page), query);
+          setMovies(res.data.results);
+        }
+      } catch (error) {
+        setIsError(true);
       }
       setIsLoading(false);
     })();
@@ -45,6 +51,10 @@ function HomePage() {
       return prev;
     });
   };
+
+  if (isError) {
+    return <ErrorPage />;
+  }
 
   return (
     <>
