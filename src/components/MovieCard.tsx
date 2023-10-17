@@ -36,7 +36,9 @@ function MovieCard({ id, imgPath, rating, title }: MovieCardProps) {
       <div className='px-5 py-3'>
         <h3 className='truncate text-md'>{title}</h3>
       </div>
-      <div className='px-5'>{renderStars(rating)}</div>
+      <div className='px-5'>
+        {renderStars(rating)} <span className='text-xs'>({rating})</span>
+      </div>
       <div className='flex justify-end p-3 pb-5'>
         <Link
           to={`/${id}`}
