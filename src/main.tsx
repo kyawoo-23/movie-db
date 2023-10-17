@@ -23,6 +23,10 @@ const router = createBrowserRouter([
         loader: LoaderMovieDetails,
         errorElement: <ErrorPage />,
       },
+      {
+        path: "*",
+        element: <ErrorPage text='Looks like you are lost' />,
+      },
     ],
   },
 ]);
