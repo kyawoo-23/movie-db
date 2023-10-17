@@ -1,24 +1,18 @@
 import { Link } from "react-router-dom";
+import { MovieCardProps } from "./MovieCard";
 
-interface MovieCardProps {
-  title: string;
-  id: number;
-  imgPath: string;
-  rating: number;
-}
-
-function MovieCard({ id, imgPath, rating, title }: MovieCardProps) {
+export function MovieCard({ id, imgPath, rating, title }: MovieCardProps) {
   const renderStars = (count: number) => {
     const stars = [];
     for (let index = 1; index <= 10; index++) {
       if (index <= count) {
-        stars.push(
-          <span key={index} className='text-primary'>
-            ★
-          </span>
-        );
+        if (count - index >= 0.5 && count - index < 1) {
+          stars.push(<BsStarHalf />);
+        } else {
+          stars.push(<span className='text-primary'>★</span>);
+        }
       } else {
-        stars.push(<span key={index}>☆</span>);
+        stars.push(<span>☆</span>);
       }
     }
     return stars;
@@ -48,5 +42,3 @@ function MovieCard({ id, imgPath, rating, title }: MovieCardProps) {
     </div>
   );
 }
-
-export default MovieCard;

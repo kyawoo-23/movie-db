@@ -23,7 +23,7 @@ function HomePage() {
         // CALL DISCOVER API
         const res = await DiscoverAPI.GetAll(parseInt(page));
         setMovies(res.data.results);
-      } else {
+      } else if (query.length > 1) {
         // CALL SEARCH API
         const res = await SearchAPI.SearchQuery(parseInt(page), query);
         setMovies(res.data.results);
@@ -52,10 +52,21 @@ function HomePage() {
         <Loader />
       ) : (
         <>
-          <button onClick={() => handlePagination("prev")}>Prev</button>
-          <button onClick={() => handlePagination("next")}>Next</button>
-
-          <br />
+          <div className='flex items-center gap-3 my-6 justify-end'>
+            <button
+              className='bg-primary text-white px-6 py-1 rounded cursor-pointer disabled:bg-slate-500 disabled:opacity-80 disabled:cursor-not-allowed'
+              onClick={() => handlePagination("prev")}
+              disabled={searchParams.get("page") === "1"}
+            >
+              Prev
+            </button>
+            <button
+              className='bg-primary text-white px-6 py-1 rounded cursor-pointer'
+              onClick={() => handlePagination("next")}
+            >
+              Next
+            </button>
+          </div>
 
           <div className='grid grid-cols-4 gap-7'>
             {movies.map((movie) => (

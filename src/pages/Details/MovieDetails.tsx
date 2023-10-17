@@ -39,7 +39,7 @@ function MovieDetails() {
                 {res.tagline}
               </p>
               <h6 className='text-lg'>Overview</h6>
-              <p className='text-sm mt-1 line-clamp-6'>{res.overview}</p>
+              <p className='text-sm mt-1 line-clamp-6 w-3/4'>{res.overview}</p>
             </div>
           </div>
         </div>
