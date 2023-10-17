@@ -4,7 +4,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "@/pages/Home/HomePage.tsx";
 import Layout from "@/components/Layout";
-import MovieDetails from "@/pages/Details/MovieDetails";
+import MovieDetails, { LoaderMovieDetails } from "@/pages/Details/MovieDetails";
 
 const router = createBrowserRouter([
   {
@@ -16,8 +16,9 @@ const router = createBrowserRouter([
         index: true,
       },
       {
-        path: "/:id",
+        path: "/:movie_id",
         element: <MovieDetails />,
+        loader: LoaderMovieDetails,
       },
     ],
   },

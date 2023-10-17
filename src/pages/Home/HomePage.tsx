@@ -4,9 +4,10 @@ import Loader from "@/components/Loader";
 import MovieCard from "@/components/MovieCard";
 import { Movie } from "@/types";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigation, useSearchParams } from "react-router-dom";
 
 function HomePage() {
+  const navigate = useNavigation();
   const [searchParams, setSearchParams] = useSearchParams({ page: "1", q: "" });
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -47,7 +48,7 @@ function HomePage() {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading || navigate.state === "loading" ? (
         <Loader />
       ) : (
         <>
