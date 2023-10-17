@@ -9,7 +9,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useNavigation, useSearchParams } from "react-router-dom";
 
-const total_pages = 500;
+let total_pages: number;
 
 function HomePage() {
   const navigate = useNavigation();
@@ -34,17 +34,20 @@ function HomePage() {
           // CALL DISCOVER API
           const res = await DiscoverAPI.GetAll(currentPage);
           setMovies(res.data.results);
+          total_pages = Math.min(res.data.total_pages, 500);
         } else if (query.length > 1) {
           // CALL SEARCH API
           const res = await SearchAPI.SearchQuery(currentPage, query);
           setMovies(res.data.results);
+          total_pages = Math.min(res.data.total_pages, 500);
         }
       } catch (error) {
         setIsError(true);
       }
+
       setIsLoading(false);
     })();
-  }, [searchParams, query, currentPage]);
+  }, [currentPage, query]);
 
   // FOR PREV NEXT BUTTONS
   const handlePagination = useCallback(
