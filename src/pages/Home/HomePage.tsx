@@ -97,7 +97,7 @@ function HomePage() {
           <button
             className='bg-primary text-white px-6 py-1 rounded cursor-pointer disabled:bg-slate-500 disabled:opacity-80 disabled:cursor-not-allowed'
             onClick={() => handlePagination("prev")}
-            disabled={searchParams.get("page") === "1"}
+            disabled={currentPage === 1}
           >
             Prev
           </button>

@@ -61,7 +61,7 @@ function MovieCard({ id, imgPath, rating, title }: MovieCardProps) {
       <div className='px-5 flex items-center gap-0.5'>
         {renderStars(rating)}{" "}
         <span className='text-xs ml-1 bg-primary px-2 rounded-full'>
-          {rating}
+          {rating.toFixed(1)}
         </span>
       </div>
       <div className='flex justify-end p-3 pb-5'>
