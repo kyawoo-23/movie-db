@@ -1,8 +1,8 @@
 import { MovieAPI } from "@/api/config";
-import { MovieDetails } from "@/types";
+import { MovieDetailsResponse } from "@/types";
 
 export const DetailsAPI = {
   GetDetails: async function (movie_id: number) {
-    return await MovieAPI.get<MovieDetails>(`movie/${movie_id}`);
+    return await MovieAPI.get<MovieDetailsResponse>(`movie/${movie_id}`);
   },
 };
